@@ -1,0 +1,79 @@
+#!/bin/bash
+. lib.sh
+
+rm -rf temp
+mkdir -p temp
+mkdir -p flags/gen
+
+for i in abro allo bi hetero pan poly; do
+  overlay flags/$i.* "romantic" "flags/gen/${i}ro.png"
+done
+
+for i in flags/*.* flags/gen/*.*; do
+  j="${i##*/}"
+  j="${j%.*}"
+
+  wave "$i" "$j"
+  flat "$i" "$j"
+done
+
+for shape in heart atentain; do
+  colored $shape '#89CFF0' baby_blue
+  colored $shape '#F4C2C2' baby_pink
+  colored $shape '#661E61' palatinate_purple
+  colored $shape '#E78587' pale_red
+  colored $shape '#DB7093' pale_violet_red
+  colored $shape '#D60270' red_purple
+  colored $shape '#0038A8' royal_azure
+  colored $shape '#FCF980' sunny_yellow
+  colored $shape '#de2018' red
+  colored $shape '#fa902a' orange
+  colored $shape '#feee3f' yellow
+  colored $shape '#22802b' green
+  colored $shape '#004df9' blue
+  colored $shape '#720f85' purple
+  colored $shape '#fafafa' bright
+  colored $shape '#090909' dark
+  colored $shape '#424242' dark_grey
+  colored $shape '#757575' grey
+  colored $shape '#b1b1b1' light_grey
+  colored $shape '#b76d54' brown
+  colored $shape '#00B5B8' bright_teal
+  colored $shape '#bf00ff' entain
+  colored $shape '#00FFEF' turquoise
+  colored $shape '#EE82EE' violet
+  colored $shape '#87CEEB' sky_blue
+  colored $shape '#00FFFF' cyan
+  colored $shape '#008080' teal
+  colored $shape '#DC143C' crimson
+  colored $shape '#800020' burgundy
+  colored $shape '#FA8072' salmon
+  colored $shape '#7FFF00' chartreuse
+  colored $shape '#FFBF00' amber
+  colored $shape '#50C878' emerald
+  colored $shape '#4B0082' indigo
+  colored $shape '#FF00FF' fuscia
+  colored $shape '#FFD700' gold
+  colored $shape '#2D2363' navy_blue
+  colored $shape '#C0C0C0' silver
+done
+
+for i in flags/*.* flags/gen/*.*; do
+  j="${i##*/}"
+  j="${j%.*}"
+
+  if [[ ! -f "dest/heart/${j}_heart.png" ]]; then
+    convert "$i" -alpha set -background transparent -gravity center -rotate 90 "temp/${j}-rotated.png"
+
+    backed heart "temp/${j}-rotated.png" "$j"
+  fi
+done
+
+for i in flags/pride.png; do
+  j="${i##*/}"
+  j="${j%.*}"
+
+  backed atentain "$i" "$j"
+done
+
+#rm -r temp/*
