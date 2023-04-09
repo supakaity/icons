@@ -1,6 +1,15 @@
 #!/bin/bash
 . lib.sh
 
+shapes=(
+  heart
+  balloon
+  verify
+)
+if [[ -f .custom ]]; then
+  . .custom
+fi
+
 rm -rf temp
 mkdir -p temp
 mkdir -p flags/gen
@@ -17,7 +26,7 @@ for i in flags/*.* flags/gen/*.*; do
   flat "$i" "$j"
 done
 
-for shape in heart atentain balloon verify; do
+for shape in "${shapes[@]}"; do
   colored $shape '#89CFF0' baby_blue
   colored $shape '#F4C2C2' baby_pink
   colored $shape '#661E61' palatinate_purple
@@ -76,13 +85,6 @@ for i in flags/*.* flags/gen/*.*; do
     convert "$i" -alpha set -background transparent -gravity center -resize '500x500!' "temp/${j}-rotated.png"
     backed verify "temp/${j}-rotated.png" "$j"
   fi
-done
-
-for i in flags/pride.png; do
-  j="${i##*/}"
-  j="${j%.*}"
-
-  backed atentain "$i" "$j"
 done
 
 #rm -r temp/*

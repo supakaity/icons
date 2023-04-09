@@ -4,7 +4,7 @@ The icons here are created by [@supakaity@blahaj.zone](https://blahaj.zone/@supa
 
 ## Building
 
-The build script `run` can be executed under a unix shell and will generate files into the `dist/` folder.
+The build script `run` can be executed under a unix shell and will generate files into the `dest/` folder.
 
 It requires ImageMagick installed to build the output files.
 
