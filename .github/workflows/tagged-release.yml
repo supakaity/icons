@@ -13,7 +13,9 @@ jobs:
     steps:
       - name: ImageMagick action
         uses: jruipinto/ImageMagick-action@v1
-    
+        with:
+          command: convert -version
+           
       - name: Build
         run: ./run
       
