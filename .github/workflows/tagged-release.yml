@@ -28,7 +28,9 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ env.GITHUB_REF_NAME }}"
           prerelease: false
+          title: "Release ${{ env.GITHUB_REF_NAME }}"
           files: |
             LICENSE.txt
             icons-${{ env.GITHUB_REF_NAME }}.zip
