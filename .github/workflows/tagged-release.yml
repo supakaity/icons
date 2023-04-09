@@ -23,14 +23,14 @@ jobs:
         run: bash ./run
 
       - name: Create zip
-        run: zip -r icons-${{ env.GITHUB_REF_NAME }}.zip README.md LICENSE.txt dest
+        run: zip -r icons-${{ github.ref_name }}.zip README.md LICENSE.txt dest
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "${{ env.GITHUB_REF_NAME }}"
+          automatic_release_tag: "${{ github.ref_name }}"
           prerelease: false
-          title: "Release ${{ env.GITHUB_REF_NAME }}"
+          title: "Release ${{ github.ref_name }}"
           files: |
             LICENSE.txt
-            icons-${{ env.GITHUB_REF_NAME }}.zip
+            icons-${{ github.ref_name }}.zip
