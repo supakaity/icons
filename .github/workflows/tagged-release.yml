@@ -21,11 +21,14 @@ jobs:
 
       - name: Build
         run: bash ./run
-      
+
+      - name: Create zip
+        run: zip -r icons-${{ env.GITHUB_REF_NAME }}.zip README.md LICENSE.txt dest
+
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           files: |
             LICENSE.txt
-            dest/
+            icons-${{ env.GITHUB_REF_NAME }}.zip
