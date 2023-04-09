@@ -17,7 +17,7 @@ for i in flags/*.* flags/gen/*.*; do
   flat "$i" "$j"
 done
 
-for shape in heart atentain; do
+for shape in heart atentain balloon verify; do
   colored $shape '#89CFF0' baby_blue
   colored $shape '#F4C2C2' baby_pink
   colored $shape '#661E61' palatinate_purple
@@ -64,8 +64,17 @@ for i in flags/*.* flags/gen/*.*; do
 
   if [[ ! -f "dest/heart/${j}_heart.png" ]]; then
     convert "$i" -alpha set -background transparent -gravity center -rotate 90 "temp/${j}-rotated.png"
-
     backed heart "temp/${j}-rotated.png" "$j"
+  fi
+
+  if [[ ! -f "dest/balloon/${j}_balloon.png" ]]; then
+    convert "$i" -alpha set -background transparent -gravity center -resize '500x500!' -rotate 10 -gravity north -shave 0x8% -gravity south -splice 0x14% "temp/${j}-rotated.png"
+    backed balloon "temp/${j}-rotated.png" "$j"
+  fi
+
+  if [[ ! -f "dest/verify/${j}_verify.png" ]]; then
+    convert "$i" -alpha set -background transparent -gravity center -resize '500x500!' "temp/${j}-rotated.png"
+    backed verify "temp/${j}-rotated.png" "$j"
   fi
 done
 
