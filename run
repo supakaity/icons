@@ -68,8 +68,8 @@ for shape in "${shapes[@]}"; do
 done
 
 for i in flags/*.* flags/gen/*.*; do
-  j="${i##*/}"
-  j="${j%.*}"
+  k="${i##*/}"
+  j="${k%.*}"
 
   if [[ ! -f "dest/heart/${j}_heart.png" ]]; then
     convert "$i" -alpha set -background transparent -gravity center -rotate 90 "temp/${j}-rotated.png"
@@ -84,6 +84,11 @@ for i in flags/*.* flags/gen/*.*; do
   if [[ ! -f "dest/verify/${j}_verify.png" ]]; then
     convert "$i" -alpha set -background transparent -gravity center -resize '500x500!' "temp/${j}-rotated.png"
     backed verify "temp/${j}-rotated.png" "$j"
+  fi
+
+  if [[ ! -f "dest/nya/${j}_nya.png" && ! -f "flags/gen/$k" && ! -f "flags/complex/$k" ]]; then
+    convert "$i" -alpha set -background transparent -gravity center -resize '550x400!' -rotate '-7' -gravity east -shave 25x0 -gravity west -shave 25x0  -gravity north -splice 0x50 -gravity south -splice 0x50 "temp/${j}-rotated.png"
+    backed nya "temp/${j}-rotated.png" "$j"
   fi
 done
 
