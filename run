@@ -87,7 +87,7 @@ for i in flags/*.* flags/gen/*.*; do
   fi
 
   if [[ ! -f "dest/nya/${j}_nya.png" && ! -f "flags/gen/$k" && ! -f "flags/complex/$k" ]]; then
-    convert "$i" -alpha set -background transparent -gravity center -resize '550x400!' -rotate '-7' -gravity east -shave 25x0 -gravity west -shave 25x0  -gravity north -splice 0x50 -gravity south -splice 0x50 "temp/${j}-rotated.png"
+    convert "$i" -alpha set -background transparent -gravity center -resize '550x420!' -rotate '-8' -gravity east -shave 25x0 -gravity west -shave 25x0  -gravity north -splice 0x40 -gravity south -splice 0x40 "temp/${j}-rotated.png"
     backed nya "temp/${j}-rotated.png" "$j"
   fi
 done
